@@ -32,7 +32,8 @@ matplotlibtimestamps = matplotlib.dates.date2num(timestamps)
 
 fig, ax = plt.subplots()
 
-plt.plot_date(x=matplotlibtimestamps, y=sig_counts, xdate=True, ydate=False)
+plt.plot_date(x=matplotlibtimestamps, y=sig_counts, xdate=True, ydate=False,
+        markersize=1)
 plt.ylim(ymin=0, ymax=4500000)
 
 # major_formatter = matplotlib.dates.DateFormatter('%d/%m/%y %h:%m:%s')
