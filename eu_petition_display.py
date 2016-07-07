@@ -5,27 +5,33 @@ import json
 import datetime
 import dateutil
 
+import argparse
+
 import ipdb
 
 filename = "all.json"
 
 
-jsonList = []
+argparser = argparse.ArgumentParser()
 
-with open(filename, "r") as f:
-    for line in f:
-        jsonList.append(json.loads(line))
+argparser.add_argument("--jsonfile", help="json file to display, format is datestamp and sig_count",
+        default="all.json")
+argparser.add_argument("--from", help="optional field to display from specified datetime", 
+        default=False)
+argparser.add_argument("--to", help="optional field to display to specified datetime",
+        default=False)
 
+args = argparser.parse_args()
 
 timestamps = []
 sig_counts = []
 
-for jsonDict in jsonList:
-    timestamp , sig_count = jsonDict.popitem()
-
-    timestamps.append(dateutil.parser.parse(timestamp))
-    sig_counts.append(int(sig_count.replace(",","")))
-
+with open(args.jsonfile, "r") as f:
+    for jsonline in f:
+        timestamp, sig_count = json.loads(jsonline).popitem()
+        
+        timestamps.append(dateutil.parser.parse(timestamp))
+        sig_counts.append(int(sig_count.replace(",","")))
 
 
 matplotlibtimestamps = matplotlib.dates.date2num(timestamps)
