@@ -87,8 +87,7 @@ ax.xaxis.set_minor_locator(matplotlib.dates.HourLocator(
 ax.xaxis.set_major_formatter(major_formatter)
 ax.xaxis.set_minor_formatter(minor_formatter)
 
-# labels = ax.get_xticklabels()
-# plt.setp(labels, rotation=30, fontsize=10)
+ax.grid(True)
 
 plt.xticks(rotation='vertical')
 
